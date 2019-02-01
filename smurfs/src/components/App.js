@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import Loader from "react-loader-spinner";
 
 import { getSmurfs } from "../actions";
 import "./App.css";
@@ -16,6 +17,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        {this.props.isLoadingSmurfs && (
+          <Loader type="Grid" color="#somecolor" height={80} width={80} />
+        )}
+        {this.props.error && <h2>Error!!!</h2>}
         {this.props.smurfs.map(smurf => (
           <div className="smurf">
             <p>{smurf.name}</p>
