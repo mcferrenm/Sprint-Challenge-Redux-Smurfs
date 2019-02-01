@@ -3,7 +3,7 @@ import React from "react";
 const SmurfForm = props => {
   return (
     <div className="smurf-form">
-      <form action="">
+      <form onSubmit={props.handleAddSmurf}>
         <input
           type="text"
           name="name"

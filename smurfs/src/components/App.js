@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Loader from "react-loader-spinner";
 
-import { getSmurfs } from "../actions";
+import { getSmurfs, addSmurf } from "../actions";
 import "./App.css";
 import SmurfsList from "./SmurfsList";
 import SmurfForm from "./SmurfForm";
@@ -12,6 +12,13 @@ import SmurfForm from "./SmurfForm";
  Just remember, `how do I `connect` my components to redux?`
  `How do I ensure that my component links the state to props?`
  */
+
+const CLEARED_SMURF_INPUTS = {
+  name: "",
+  age: "",
+  height: ""
+};
+
 class App extends Component {
   state = {
     smurfInputs: {
@@ -38,12 +45,23 @@ class App extends Component {
     }));
   };
 
+  handleAddSmurf = e => {
+    e.preventDefault();
+
+    this.props.addSmurf(this.state.smurfInputs);
+
+    this.setState({
+      smurfInputs: CLEARED_SMURF_INPUTS
+    });
+  };
+
   render() {
     return (
       <div className="App">
         <SmurfForm
           smurfInputs={this.state.smurfInputs}
           handleChange={this.handleChange}
+          handleAddSmurf={this.handleAddSmurf}
         />
         <SmurfsList smurfs={this.props.smurfs} />
         {this.props.isLoadingSmurfs && this.loadingRender()}
@@ -61,5 +79,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getSmurfs }
+  { getSmurfs, addSmurf }
 )(App);
