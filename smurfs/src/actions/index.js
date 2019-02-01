@@ -3,6 +3,10 @@
   Be sure to export each action type so you can pull it into your reducer
 */
 
+export const GET_SMURFS_START = "GET_SMURFS_START";
+export const GET_SMURFS_SUCCESS = "GET_SMURFS_SUCCESS";
+export const GET_SMURFS_FAILURE = "GET_SMURFS_FAILURE";
+
 /*
   For this project you'll need at least 2 action creators for the main portion,
    and 2 more for the stretch problem.
@@ -13,3 +17,7 @@
    U - updateSmurf
    D - deleteSmurf
 */
+
+export const getSmurfs = () => dispatch => {
+  dispatch({ type: GET_SMURFS_START });
+};
