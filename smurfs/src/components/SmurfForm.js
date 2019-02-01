@@ -3,7 +3,7 @@ import React from "react";
 const SmurfForm = props => {
   return (
     <div className="smurf-form">
-      <form onSubmit={props.handleAddSmurf}>
+      <form>
         <input
           type="text"
           name="name"
@@ -26,9 +26,9 @@ const SmurfForm = props => {
           onChange={props.handleChange}
         />
         {props.isEditingSmurfs ? (
-          <button>Update Smurf</button>
+          <button onClick={props.handleUpdateSmurf}>Update Smurf</button>
         ) : (
-          <button>Add Smurf</button>
+          <button onClick={props.handleAddSmurf}>Add Smurf</button>
         )}
       </form>
     </div>

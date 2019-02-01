@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Loader from "react-loader-spinner";
 
-import { getSmurfs, addSmurf, populateInputs } from "../actions";
+import { getSmurfs, addSmurf, populateInputs, updateSmurf } from "../actions";
 import "./App.css";
 import SmurfsList from "./SmurfsList";
 import SmurfForm from "./SmurfForm";
@@ -18,7 +18,8 @@ class App extends Component {
     smurfInputs: {
       name: "",
       age: "",
-      height: ""
+      height: "",
+      id: ""
     }
   };
   componentDidMount() {
@@ -61,6 +62,16 @@ class App extends Component {
     });
   };
 
+  handleUpdateSmurf = e => {
+    e.preventDefault();
+
+    this.props.updateSmurf(this.state.smurfInputs);
+
+    this.setState({
+      smurfInputs: CLEARED_SMURF_INPUTS
+    });
+  };
+
   render() {
     return (
       <div className="App">
@@ -69,6 +80,7 @@ class App extends Component {
           handleChange={this.handleChange}
           handleAddSmurf={this.handleAddSmurf}
           isEditingSmurfs={this.props.isEditingSmurfs}
+          handleUpdateSmurf={this.handleUpdateSmurf}
         />
         <SmurfsList
           smurfs={this.props.smurfs}
@@ -90,5 +102,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getSmurfs, addSmurf, populateInputs }
+  { getSmurfs, addSmurf, populateInputs, updateSmurf }
 )(App);
