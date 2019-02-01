@@ -39,10 +39,24 @@ const smurfs = (state = initialState, action) => {
     case GET_SMURFS_START:
       return {
         ...state,
-        isLoadingSmurfs: true
+        isLoadingSmurfs: true,
+        error: ""
       };
+    case GET_SMURFS_SUCCESS:
+      return {
+        ...state,
+        smurfs: action.payload,
+        isLoadingSmurfs: false
+      };
+    case GET_SMURFS_FAILURE:
+      return {
+        ...state,
+        isLoadingSmurfs: false,
+        error: action.payload
+      };
+    default:
+      return state;
   }
-  return state;
 };
 
 export default smurfs;
