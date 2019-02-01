@@ -25,7 +25,11 @@ const SmurfForm = props => {
           autoComplete="off"
           onChange={props.handleChange}
         />
-        <button>Add Smurf</button>
+        {props.isEditingSmurfs ? (
+          <button>Update Smurf</button>
+        ) : (
+          <button>Add Smurf</button>
+        )}
       </form>
     </div>
   );

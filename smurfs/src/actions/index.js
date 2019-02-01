@@ -10,6 +10,8 @@ export const ADD_SMURF_START = "ADD_SMURFS_START";
 export const ADD_SMURF_SUCCESS = "ADD_SMURFS_SUCCESS";
 export const ADD_SMURF_FAILURE = "ADD_SMURFS_FAILURE";
 
+export const POPULATE_INPUTS_START = "POPULATE_INPUTS_START";
+
 export const getSmurfs = () => dispatch => {
   dispatch({ type: GET_SMURFS_START });
   axios
@@ -24,4 +26,8 @@ export const addSmurf = newSmurf => dispatch => {
     .post(`${BASE_URL}/smurfs`, newSmurf)
     .then(res => dispatch({ type: ADD_SMURF_SUCCESS, payload: res.data }))
     .catch(err => dispatch({ type: ADD_SMURF_FAILURE, payload: err }));
+};
+
+export const populateInputs = () => dispatch => {
+  dispatch({ type: POPULATE_INPUTS_START });
 };

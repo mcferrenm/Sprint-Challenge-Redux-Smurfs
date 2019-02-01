@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Loader from "react-loader-spinner";
 
-import { getSmurfs, addSmurf } from "../actions";
+import { getSmurfs, addSmurf, populateInputs } from "../actions";
 import "./App.css";
 import SmurfsList from "./SmurfsList";
 import SmurfForm from "./SmurfForm";
@@ -49,6 +49,18 @@ class App extends Component {
     });
   };
 
+  handlePopulateInputs = (e, id) => {
+    e.preventDefault();
+
+    const selectedSmurf = this.props.smurfs.find(smurf => smurf.id === id);
+
+    this.props.populateInputs();
+
+    this.setState({
+      smurfInputs: selectedSmurf
+    });
+  };
+
   render() {
     return (
       <div className="App">
@@ -56,8 +68,12 @@ class App extends Component {
           smurfInputs={this.state.smurfInputs}
           handleChange={this.handleChange}
           handleAddSmurf={this.handleAddSmurf}
+          isEditingSmurfs={this.props.isEditingSmurfs}
         />
-        <SmurfsList smurfs={this.props.smurfs} />
+        <SmurfsList
+          smurfs={this.props.smurfs}
+          handlePopulateInputs={this.handlePopulateInputs}
+        />
         {this.props.isLoadingSmurfs && this.loadingRender()}
         {this.props.error && this.errorRender()}
       </div>
@@ -68,10 +84,11 @@ class App extends Component {
 const mapStateToProps = state => ({
   smurfs: state.smurfs,
   isLoadingSmurfs: state.isLoadingSmurfs,
+  isEditingSmurfs: state.isEditingSmurfs,
   error: state.error
 });
 
 export default connect(
   mapStateToProps,
-  { getSmurfs, addSmurf }
+  { getSmurfs, addSmurf, populateInputs }
 )(App);

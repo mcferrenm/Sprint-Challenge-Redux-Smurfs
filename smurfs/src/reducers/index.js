@@ -4,7 +4,8 @@ import {
   GET_SMURFS_FAILURE,
   ADD_SMURF_START,
   ADD_SMURF_SUCCESS,
-  ADD_SMURF_FAILURE
+  ADD_SMURF_FAILURE,
+  POPULATE_INPUTS_START
 } from "../actions";
 
 /*
@@ -22,6 +23,7 @@ import {
 const initialState = {
   smurfs: [],
   isLoadingSmurfs: false,
+  isEditingSmurfs: false,
   error: ""
 };
 
@@ -62,6 +64,11 @@ const smurfs = (state = initialState, action) => {
         ...state,
         isLoadingSmurfs: false,
         error: action.payload
+      };
+    case POPULATE_INPUTS_START:
+      return {
+        ...state,
+        isEditingSmurfs: true
       };
     default:
       return state;
