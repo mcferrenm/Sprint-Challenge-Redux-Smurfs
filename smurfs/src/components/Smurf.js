@@ -9,6 +9,9 @@ const Smurf = props => {
       <button onClick={e => props.handlePopulateInputs(e, props.smurf.id)}>
         Update
       </button>
+      <button onClick={e => props.handleDeleteSmurf(e, props.smurf.id)}>
+        Delete
+      </button>
     </div>
   );
 };

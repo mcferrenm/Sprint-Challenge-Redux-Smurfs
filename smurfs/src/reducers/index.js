@@ -8,7 +8,10 @@ import {
   POPULATE_INPUTS_START,
   UPDATE_SMURF_START,
   UPDATE_SMURF_SUCCESS,
-  UPDATE_SMURF_FAILURE
+  UPDATE_SMURF_FAILURE,
+  DELETE_SMURF_START,
+  DELETE_SMURF_SUCCESS,
+  DELETE_SMURF_FAILURE
 } from "../actions";
 
 /*
@@ -28,6 +31,7 @@ const initialState = {
   isLoadingSmurfs: false,
   isEditingSmurfs: false,
   isUpdatingSmurfs: false,
+  isDeletingSmurfs: false,
   error: ""
 };
 
@@ -96,6 +100,27 @@ const smurfs = (state = initialState, action) => {
         isLoadingSmurfs: false,
         isEditingSmurfs: false,
         isUpdatingSmurfs: false,
+        error: action.payload
+      };
+    case DELETE_SMURF_START:
+      return {
+        ...state,
+        isLoadingSmurfs: true,
+        isDeletingSmurfs: true,
+        error: ""
+      };
+    case DELETE_SMURF_SUCCESS:
+      return {
+        ...state,
+        smurfs: action.payload,
+        isLoadingSmurfs: false,
+        isDeletingSmurfs: false
+      };
+    case DELETE_SMURF_FAILURE:
+      return {
+        ...state,
+        isLoadingSmurfs: false,
+        isDeletingSmurfs: false,
         error: action.payload
       };
     default:

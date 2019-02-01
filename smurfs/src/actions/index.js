@@ -16,6 +16,10 @@ export const UPDATE_SMURF_START = "UPDATE_SMURFS_START";
 export const UPDATE_SMURF_SUCCESS = "UPDATE_SMURFS_SUCCESS";
 export const UPDATE_SMURF_FAILURE = "UPDATE_SMURFS_FAILURE";
 
+export const DELETE_SMURF_START = "DELETE_SMURFS_START";
+export const DELETE_SMURF_SUCCESS = "DELETE_SMURFS_SUCCESS";
+export const DELETE_SMURF_FAILURE = "DELETE_SMURFS_FAILURE";
+
 export const getSmurfs = () => dispatch => {
   dispatch({ type: GET_SMURFS_START });
   axios
@@ -42,4 +46,12 @@ export const updateSmurf = updatedSmurf => dispatch => {
     .put(`${BASE_URL}/smurfs/${updatedSmurf.id}`, updatedSmurf)
     .then(res => dispatch({ type: UPDATE_SMURF_SUCCESS, payload: res.data }))
     .catch(err => dispatch({ type: UPDATE_SMURF_FAILURE, payload: err }));
+};
+
+export const deleteSmurf = id => dispatch => {
+  dispatch({ type: DELETE_SMURF_START });
+  axios
+    .delete(`${BASE_URL}/smurfs/${id}`)
+    .then(res => dispatch({ type: DELETE_SMURF_SUCCESS, payload: res.data }))
+    .catch(err => dispatch({ type: DELETE_SMURF_FAILURE, payload: err }));
 };

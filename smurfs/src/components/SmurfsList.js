@@ -9,6 +9,7 @@ const SmurfsList = props => {
           key={smurf.id}
           smurf={smurf}
           handlePopulateInputs={props.handlePopulateInputs}
+          handleDeleteSmurf={props.handleDeleteSmurf}
         />
       ))}
     </div>
