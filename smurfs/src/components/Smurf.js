@@ -1,18 +1,19 @@
 import React from "react";
+import { Button, Card } from "reactstrap";
 
 const Smurf = props => {
   return (
-    <div className="smurf">
+    <Card>
       <p>{props.smurf.name}</p>
       <p>{props.smurf.age}</p>
       <p>{props.smurf.height}</p>
-      <button onClick={e => props.handlePopulateInputs(e, props.smurf.id)}>
+      <Button onClick={e => props.handlePopulateInputs(e, props.smurf.id)}>
         Update
-      </button>
-      <button onClick={e => props.handleDeleteSmurf(e, props.smurf.id)}>
+      </Button>
+      <Button onClick={e => props.handleDeleteSmurf(e, props.smurf.id)}>
         Delete
-      </button>
-    </div>
+      </Button>
+    </Card>
   );
 };
 

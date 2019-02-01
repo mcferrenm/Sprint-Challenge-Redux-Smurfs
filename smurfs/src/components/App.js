@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Loader from "react-loader-spinner";
+import { Container, Row, Col } from "reactstrap";
+
+import Jumbo from "./Jumbotron";
 
 import {
   getSmurfs,
@@ -86,22 +89,29 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <SmurfForm
-          smurfInputs={this.state.smurfInputs}
-          handleChange={this.handleChange}
-          handleAddSmurf={this.handleAddSmurf}
-          isEditingSmurfs={this.props.isEditingSmurfs}
-          handleUpdateSmurf={this.handleUpdateSmurf}
-        />
-        <SmurfsList
-          smurfs={this.props.smurfs}
-          handlePopulateInputs={this.handlePopulateInputs}
-          handleDeleteSmurf={this.handleDeleteSmurf}
-        />
-        {this.props.isLoadingSmurfs && this.loadingRender()}
-        {this.props.error && this.errorRender()}
-      </div>
+      <Container>
+        <Jumbo />
+        <Row>
+          <Col xs="6">
+            <SmurfForm
+              smurfInputs={this.state.smurfInputs}
+              handleChange={this.handleChange}
+              handleAddSmurf={this.handleAddSmurf}
+              isEditingSmurfs={this.props.isEditingSmurfs}
+              handleUpdateSmurf={this.handleUpdateSmurf}
+            />
+            {this.props.isLoadingSmurfs && this.loadingRender()}
+            {this.props.error && this.errorRender()}
+          </Col>
+          <Col xs="6">
+            <SmurfsList
+              smurfs={this.props.smurfs}
+              handlePopulateInputs={this.handlePopulateInputs}
+              handleDeleteSmurf={this.handleDeleteSmurf}
+            />
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }
