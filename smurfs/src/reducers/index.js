@@ -29,6 +29,7 @@ import {
 const initialState = {
   smurfs: [],
   isLoadingSmurfs: false,
+  isAddingSmurfs: false,
   isEditingSmurfs: false,
   isUpdatingSmurfs: false,
   isDeletingSmurfs: false,
@@ -59,18 +60,21 @@ const smurfs = (state = initialState, action) => {
       return {
         ...state,
         isLoadingSmurfs: true,
+        isAddingSmurfs: true,
         error: ""
       };
     case ADD_SMURF_SUCCESS:
       return {
         ...state,
         smurfs: action.payload,
-        isLoadingSmurfs: false
+        isLoadingSmurfs: false,
+        isAddingSmurfs: false
       };
     case ADD_SMURF_FAILURE:
       return {
         ...state,
         isLoadingSmurfs: false,
+        isAddingSmurfs: false,
         error: action.payload
       };
     case POPULATE_INPUTS_START:
