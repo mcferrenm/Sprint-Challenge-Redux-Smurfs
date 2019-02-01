@@ -4,6 +4,7 @@ import Loader from "react-loader-spinner";
 
 import { getSmurfs } from "../actions";
 import "./App.css";
+import SmurfsList from "./SmurfsList";
 /*
  to wire this component up you're going to need a few things.
  I'll let you do this part on your own. 
@@ -21,13 +22,7 @@ class App extends Component {
           <Loader type="Grid" color="#somecolor" height={80} width={80} />
         )}
         {this.props.error && <h2>Error!!!</h2>}
-        {this.props.smurfs.map(smurf => (
-          <div className="smurf">
-            <p>{smurf.name}</p>
-            <p>{smurf.age}</p>
-            <p>{smurf.height}</p>
-          </div>
-        ))}
+        <SmurfsList smurfs={this.props.smurfs} />
       </div>
     );
   }
